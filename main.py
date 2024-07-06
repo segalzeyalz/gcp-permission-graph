@@ -1,7 +1,7 @@
 
 # Press the green button in the gutter to run the script.
 def main():
-    pass
+    graph = Graph()
 
 
 if __name__ == '__main__':
