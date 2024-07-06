@@ -1,1 +1,55 @@
+# Ignore all files in the .idea directory (for JetBrains IDEs)
 .idea/*
+
+# Ignore bytecode files and cache directories
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment directories
+venv/
+env/
+.venv/
+.ENV/
+
+# Ignore distribution/build directories
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore Python-specific logs and temp files
+*.log
+*.pot
+*.pyo
+*.~ 
+
+# Ignore pytest cache
+.cache/
+.tox/
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore local environment variable files
+.env
+.env.*
+
+# Ignore pipenv files
+Pipfile.lock
+
+# Ignore mypy files
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ignore pytest specific files
+.pytest_cache/
