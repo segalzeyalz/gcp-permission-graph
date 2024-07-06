@@ -75,6 +75,20 @@ Example:
 python main.py data/example.json1 --resource-identities resource1
 ```
 
+## Example Usage
+To build the graph and query it using the example data:
+
+```bash
+python example_usage.py
+```
+
+This will output:
+```
+Resource Hierarchy for 'resource1': ['folder1', 'organization1']
+Permissions for 'user:alex@test.authomize.com': [('resource1', 'RESOURCE', 'owner'), ('resource2', 'RESOURCE', 'editor')]
+Identities with permissions on 'resource2': [('user:alex@test.authomize.com', 'editor'), ('user:ron@test.authomize.com', 'viewer')]
+```
+
 ## Development
 
 ### Running Tests
