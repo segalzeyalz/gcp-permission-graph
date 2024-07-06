@@ -13,13 +13,13 @@ class GraphBuilder:
         data = self.parser.parse(file_path)
         for resource in data:
             resource_node = GraphNode(resource['resource_id'], NodeType.RESOURCE)
-            self.graph += resource_node  # Using the += operator to add nodes
+            self.graph.add_node(resource_node)
 
             # Add ancestor edges
             ancestors = resource.get('ancestors', [])
             for i in range(1, len(ancestors)):
                 parent_node = GraphNode(ancestors[i], NodeType.RESOURCE)
-                self.graph += parent_node  # Using the += operator to add nodes
+                self.graph.add_node(parent_node)
                 self.graph.add_edge(Edge(parent_node, resource_node, EdgeType.PARENT))
 
             # Add permission bindings
