@@ -1,8 +1,8 @@
 import pytest
 import json
 from src.graph.graph import Graph
-from src.graph.graph_node import GraphNode, NodeType
-from src.graph.edge import Edge, EdgeType
+from src.graph.graph_node import NodeType
+from src.graph.edge import EdgeType
 from src.builder.graph_builder import GraphBuilder
 from src.parser.graph_json_parser import GraphJsonParser
 
