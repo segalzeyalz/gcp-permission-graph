@@ -16,3 +16,4 @@ class Edge:
     from_node: GraphNode
     to_node: GraphNode
     type: EdgeType
+    role: str = None

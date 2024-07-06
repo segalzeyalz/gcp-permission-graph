@@ -30,5 +30,5 @@ class GraphBuilder:
                     identity_node = GraphNode(member, NodeType.IDENTITY)
                     self.graph.add_node(identity_node)
 
-                    edge = Edge(identity_node, resource_node, EdgeType.PERMISSION)
+                    edge = Edge(identity_node, resource_node, EdgeType.PERMISSION, role)
                     self.graph.add_edge(edge)

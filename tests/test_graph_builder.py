@@ -1,11 +1,11 @@
-import json
-
 import pytest
+import json
 from src.graph.graph import Graph
-from src.graph.graph_node import NodeType
-from src.graph.edge import EdgeType
+from src.graph.graph_node import GraphNode, NodeType
+from src.graph.edge import Edge, EdgeType
 from src.builder.graph_builder import GraphBuilder
 from src.parser.graph_json_parser import GraphJsonParser
+
 
 @pytest.fixture
 def setup_json_file(tmp_path):
@@ -54,17 +54,17 @@ def test_graph_builder(setup_json_file):
 
     # Check edges
     expected_edges = [
-        ("organization1", "folder1", EdgeType.PARENT),
-        ("organization1", "folder2", EdgeType.PARENT),
-        ("folder1", "folder3", EdgeType.PARENT),
-        ("folder1", "resource1", EdgeType.PARENT),
-        ("folder2", "resource2", EdgeType.PARENT),
-        ("user:alex@test.authomize.com", "resource1", EdgeType.PERMISSION),
-        ("user:alex@test.authomize.com", "resource2", EdgeType.PERMISSION),
-        ("user:ron@test.authomize.com", "resource2", EdgeType.PERMISSION)
+        ("organization1", "folder1", EdgeType.PARENT, None),
+        ("organization1", "folder2", EdgeType.PARENT, None),
+        ("folder1", "folder3", EdgeType.PARENT, None),
+        ("folder1", "resource1", EdgeType.PARENT, None),
+        ("folder2", "resource2", EdgeType.PARENT, None),
+        ("user:alex@test.authomize.com", "resource1", EdgeType.PERMISSION, "owner"),
+        ("user:alex@test.authomize.com", "resource2", EdgeType.PERMISSION, "editor"),
+        ("user:ron@test.authomize.com", "resource2", EdgeType.PERMISSION, "viewer")
     ]
 
-    edges_set = set((e.from_node.id, e.to_node.id, e.type) for e in graph.edges)
-    for from_id, to_id, edge_type in expected_edges:
-        assert (from_id, to_id,
-                edge_type) in edges_set, f"Edge from {from_id} to {to_id} of type {edge_type.name} should be in the graph"
+    edges_set = set((e.from_node.id, e.to_node.id, e.type, e.role) for e in graph.edges)
+    for from_id, to_id, edge_type, role in expected_edges:
+        assert (from_id, to_id, edge_type,
+                role) in edges_set, f"Edge from {from_id} to {to_id} of type {edge_type.name} and role {role} should be in the graph"
