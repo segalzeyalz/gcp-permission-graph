@@ -111,3 +111,39 @@ pip install pytest
 - `src/`: Contains the source code for the graph, nodes, edges, parser, and builder.
 - `tests/`: Contains the test cases for the project.
 - `data/`: Contains sample data files.
+
+### Method Efficiency and Trade-Offs
+
+methods and trade-offs
+
+| Method                     | Current Complexity | Way to Improve                                     | Trade-Offs                                                            |
+|----------------------------|--------------------|----------------------------------------------------|----------------------------------------------------------------------|
+| `add_node`                 | O(1)               | Efficient as is                                    | N/A                                                                  |
+| `add_edge`                 | O(1)               | Efficient as is                                    | N/A                                                                  |
+| `get_resource_hierarchy`   | O(n)               | Use `parent_map` for efficient parent lookups      | Increased memory usage and complexity of maintaining `parent_map`    |
+| `get_identity_permissions` | O(n)               | Use `permission_map` for efficient permission lookups | Increased memory usage and complexity of maintaining `permission_map`|
+| `get_resource_identities`  | O(1)               | Already optimized using `permission_map`           | N/A                                                                  |
+
+### Alternative Approaches
+
+#### Depth-First Search (DFS) or Breadth-First Search (BFS)
+
+Using DFS/BFS for `get_resource_hierarchy`:
+- **Implementation**: Perform a DFS or BFS starting from the given resource and traverse upwards to build the hierarchy.
+- **Complexity**: O(V + E), where V is the number of vertices (nodes) and E is the number of edges.
+- **Trade-Offs**: 
+  - **Memory Usage**: Lower memory usage compared to maintaining a hashmap.
+  - **Performance**: Potentially slower than O(1) lookups, especially for dense graphs.
+  - **Implementation Complexity**: Moderate, involves additional code for traversal.
+
+#### Adjacency Lists without Hashmaps
+
+Using adjacency lists for `get_identity_permissions` and `get_resource_identities`:
+- **Implementation**: Store edges directly connected to each node using lists or arrays indexed by node IDs.
+- **Complexity**: O(V + E) for traversing nodes and edges.
+- **Trade-Offs**: 
+  - **Memory Usage**: Slightly lower memory usage compared to hashmaps.
+  - **Performance**: Lookup operations are O(V + E), slower than O(1) hash lookups.
+  - **Implementation Complexity**: Higher, involves manual management of lists and careful indexing.
+
+These approaches offer alternatives to hashmaps/dictionaries, balancing memory usage and performance based on specific needs and constraints.
